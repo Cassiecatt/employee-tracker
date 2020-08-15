@@ -35,11 +35,10 @@ function updateEmployeeRole(roleId, employeeId) {
     return connection.query('UPDATE employee SET role_id ? WHERE id = ?', [roleId, employeeId]);
 }
 
+// how do i export?
 
 
 
-// viewAllEmployees(connection);
-// viewAllDepartments(connection);
 // viewAllRoles(connection);
 
 // //View all roles
