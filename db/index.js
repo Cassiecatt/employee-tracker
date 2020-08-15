@@ -30,7 +30,10 @@ function addEmployee(employee) {
     return connection.query('INSERT INTO employee SET ?', employee);
 };
 
-//Need to export but how??
+//Update employee role
+function updateEmployeeRole(roleId, employeeId) {
+    return connection.query('UPDATE employee SET role_id ? WHERE id = ?', [roleId, employeeId]);
+}
 
 
 
