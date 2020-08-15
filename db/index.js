@@ -1,43 +1,50 @@
 const connection = require("./connection");
 
-// View all departments funcion
-function viewAllDepartments() {
-    return connection.query('SELECT * FROM department');
-};
+class DB {
+  constructor(connection) {
+    this.connection = connection;
+  }
 
-// View all roles
-function viewAllRoles() {
-    return connection.query('SELECT * FROM role');
-};
+  // View all departments funcion
+  viewAllDepartments() {
+    return connection.query("SELECT * FROM department");
+  }
 
-// View all employees
-function viewAllEmployees() {
-    return connection.query('SELECT * FROM employee');
-};
+  // View all roles
+  viewAllRoles() {
+    return connection.query("SELECT * FROM role");
+  }
 
-//Add a department
-function addDepartment(department) {
-    return connection.query('INTSERT INTO department SET ?', department);
-};
+  // View all employees
+  viewAllEmployees() {
+    return connection.query("SELECT * FROM employee");
+  }
 
-//Add a role
-function addRole(role) {
-    return connection.query('INSERT INTO role SET ?', role);
-};
+  //Add a department
+  addDepartment(department) {
+    return connection.query("INTSERT INTO department SET ?", department);
+  }
 
-//Add an employee
-function addEmployee(employee) {
-    return connection.query('INSERT INTO employee SET ?', employee);
-};
+  //Add a role
+  addRole(role) {
+    return connection.query("INSERT INTO role SET ?", role);
+  }
 
-//Update employee role
-function updateEmployeeRole(roleId, employeeId) {
-    return connection.query('UPDATE employee SET role_id ? WHERE id = ?', [roleId, employeeId]);
+  //Add an employee
+  addEmployee(employee) {
+    return connection.query("INSERT INTO employee SET ?", employee);
+  }
+
+  //Update employee role
+  updateEmployeeRole(roleId, employeeId) {
+    return connection.query("UPDATE employee SET role_id ? WHERE id = ?", [
+      roleId,
+      employeeId,
+    ]);
+  }
 }
 
-// how do i export?
-
-
+module.exports = DB;
 
 // viewAllRoles(connection);
 
@@ -48,5 +55,3 @@ function updateEmployeeRole(roleId, employeeId) {
 //         console.log(res)
 //     });
 // };
-
-
