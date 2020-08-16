@@ -164,7 +164,7 @@ function addEmployee(connection) {
             first_name: answer.firstName,
             last_name: answer.lastName,
             role_id: answer.employeeRoleID,
-            manager_id: answer.employeeManagerID
+            manager_id: answer.employeeManagerID // need to figure out how to make manager_id accept NULL 
         },
         function(err, res) {
             if(err) throw err;
@@ -175,7 +175,7 @@ function addEmployee(connection) {
     })
 };
 
-// Update employee role - syntax error near ? but not sure
+// Update employee role 
 function updateEmployeeRole(connection) {
     inquirer.prompt([{
         type: "input",
@@ -188,7 +188,7 @@ function updateEmployeeRole(connection) {
         message: "Enter the ID of the role you are wanting to assign"
     }])
     .then(function(answer) {
-        connection.query('UPDATE employee SET role_id = ? WHERE id = ?',
+        connection.query('UPDATE employee SET role_id = ? WHERE id = ?', //returning a syntax error near ? although it tests fine in my seeds file
         {
             role_id: answer.roleID,
             id: answer.employeeID,
