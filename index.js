@@ -36,6 +36,7 @@ const questions = () => {
                 addDepartment(connection)
                 break;
             case "Add a Role":
+                addRole(connection);
                 break;
             case "Add an Employee":
                 break;
@@ -94,6 +95,39 @@ function addDepartment(connection) {
         function(err, res) {
             if(err) throw err;
             console.log("\n Departments Retrieved from DB \n");
+            console.table(res);
+            questions();
+        });
+    })
+};
+
+//Add a role
+function addRole(connection) {
+    inquirer.prompt([{
+        type: "input",
+        name: "roleTitle",
+        message: "Enter role title"
+    },
+    {
+        type: "input",
+        name: "roleSalary",
+        message: "Enter role salary"
+    },
+     {
+         type: 'input',
+         name: "roleID",
+         message: "Choose the role's department ID (1 - DEV, 2 - DESIGN, 3 - Paid, 4 - Sales, 5 - Content)",
+     }])
+    .then(function(answer) {
+        connection.query('INSERT INTO role SET ?',
+        {
+            title: answer.roleTitle,
+            salary: answer.roleSalary,
+            department_id: answer.roleID 
+        },
+        function(err, res) {
+            if(err) throw err;
+            console.log("\n Roles Retrieved from DB \n");
             console.table(res);
             questions();
         });

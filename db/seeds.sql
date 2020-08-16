@@ -5,7 +5,7 @@ INSERT INTO department
 VALUES
     ('Development'),
     ('Design'),
-    ('Services'),
+    ('Paid Search'),
     ('Sales');
 
 INSERT INTO role
