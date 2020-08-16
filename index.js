@@ -39,6 +39,7 @@ const questions = () => {
                 addRole(connection);
                 break;
             case "Add an Employee":
+                addEmployee(connection)
                 break;
             case "Update an Employee Role":
                 break;
@@ -94,7 +95,7 @@ function addDepartment(connection) {
         },
         function(err, res) {
             if(err) throw err;
-            console.log("\n Departments Retrieved from DB \n");
+            console.log("\n Added Department to DB \n");
             console.table(res);
             questions();
         });
@@ -127,7 +128,46 @@ function addRole(connection) {
         },
         function(err, res) {
             if(err) throw err;
-            console.log("\n Roles Retrieved from DB \n");
+            console.log("\n Added Role to DB \n");
+            console.table(res);
+            questions();
+        });
+    })
+};
+
+//Add an employee
+function addEmployee(connection) {
+    inquirer.prompt([{
+        type: "input",
+        name: "firstName",
+        message: "Enter employees first name"
+    },
+    {
+        type: "input",
+        name: "lastName",
+        message: "Enter employees last name"
+    },
+     {
+         type: 'input',
+         name: "employeeRoleID",
+         message: "Enter the employees role id",
+     },
+     {
+        type: 'input',
+        name: "employeeManagerID",
+        message: "Enter the employees manager id",
+    }])
+    .then(function(answer) {
+        connection.query('INSERT INTO employee SET ?',
+        {
+            first_name: answer.firstName,
+            last_name: answer.lastName,
+            role_id: answer.employeeRoleID,
+            manager_id: answer.employeeManagerID
+        },
+        function(err, res) {
+            if(err) throw err;
+            console.log("\n Employee Added to DB \n");
             console.table(res);
             questions();
         });
