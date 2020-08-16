@@ -23,7 +23,7 @@ const questions = () => {
         }
     ]).then(answer => {
         switch (answer.options) {
-            case "View All Employees":
+            case "View ALL Employees":
                 viewAllEmployees(connection);
                 break;
             case "View All Employees By Department":
