@@ -5,7 +5,7 @@ const table = require("console.table");
 
 // INQUIRER questions
 const questions = () => {
-    return inquirer.prompt([
+    inquirer.prompt([
         {
             type: "list",
             name: "options",
@@ -53,15 +53,17 @@ function viewAllRoles(connection) {
         if(err) throw err;
         console.log("\n Roles Retrieved from DB \n");
         console.table(res);
+        questions();
     });
-    questions();
 };
 
+//View all employees (need to update query)
 function viewAllEmployees(connection) {
-    connection.query('SELECT * FROM employee', function(err, res) {
+    connection.query('SELECT employee.id, employee.first_name, employee.last_name, employee.manager_id, role.title, department.name AS department, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department on role.department_id = department.id',
+    function(err, res) {
         if(err) throw err;
         console.log("\n Employees Retrieved from DB \n");
         console.table(res);
+        questions();
     });
-    questions();
 };
