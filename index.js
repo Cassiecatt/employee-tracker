@@ -42,6 +42,7 @@ const questions = () => {
                 addEmployee(connection)
                 break;
             case "Update an Employee Role":
+                updateEmployeeRole(connection)
                 break;
             default:
                 // quit();
@@ -116,15 +117,15 @@ function addRole(connection) {
     },
      {
          type: 'input',
-         name: "roleID",
-         message: "Choose the role's department ID (1 - DEV, 2 - DESIGN, 3 - Paid, 4 - Sales, 5 - Content)",
+         name: "deptID",
+         message: "Enter the role's department ID"
      }])
     .then(function(answer) {
         connection.query('INSERT INTO role SET ?',
         {
             title: answer.roleTitle,
             salary: answer.roleSalary,
-            department_id: answer.roleID 
+            department_id: answer.deptID
         },
         function(err, res) {
             if(err) throw err;
@@ -168,6 +169,33 @@ function addEmployee(connection) {
         function(err, res) {
             if(err) throw err;
             console.log("\n Employee Added to DB \n");
+            console.table(res);
+            questions();
+        });
+    })
+};
+
+// Update employee role - syntax error near ? but not sure
+function updateEmployeeRole(connection) {
+    inquirer.prompt([{
+        type: "input",
+        name: "employeeID",
+        message: "Enter the ID of the employee you are updating"
+    },
+    {
+        type: "input",
+        name: "roleID",
+        message: "Enter the ID of the role you are wanting to assign"
+    }])
+    .then(function(answer) {
+        connection.query('UPDATE employee SET role_id = ? WHERE id = ?',
+        {
+            role_id: answer.roleID,
+            id: answer.employeeID,
+        },
+        function(err, res) {
+            if(err) throw err;
+            console.log("\n Employee Role Updated in DB \n");
             console.table(res);
             questions();
         });

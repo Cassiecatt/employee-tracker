@@ -31,4 +31,4 @@ VALUES
     ('Jonny', 'Draper', 5, NULL),
     ('Nikita', 'Brown', 6, 5),
     ('Jenny', 'Smith', 7, NULL),
-    ('Tom', 'Road', 8, 7);
+    ('Tom', 'Road', 8, 7)
