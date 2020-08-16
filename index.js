@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
-const db = require("./db"); //require everything in db folder
-const table = ("console.table");
+const connection = require("./db/connection");
+const table = require("console.table");
 
 
 // INQUIRER questions
@@ -18,16 +18,18 @@ const questions = () => {
                 "Add a Role",
                 "Add an Employee",
                 "Update an Employee Role",
-                "Quit"
+                "Leave"
             ]
         }
-    ]).then(res => {
-        switch (res.choice) {
+    ]).then(answer => {
+        switch (answer.options) {
             case "View All Employees":
+                viewAllEmployees(connection);
                 break;
             case "View All Employees By Department":
                 break;
             case "View ALL Roles":
+                viewAllRoles(connection);
                 break;
             case "Add a Department":
                 break;
@@ -38,10 +40,28 @@ const questions = () => {
             case "Update an Employee Role":
                 break;
             default:
-                Quit;
+                // quit();
         }
     })
 };
-
 questions();
+  
 
+//View all roles
+function viewAllRoles(connection) {
+    connection.query('SELECT * FROM role', function(err, res) {
+        if(err) throw err;
+        console.log("\n Roles Retrieved from DB \n");
+        console.table(res);
+    });
+    questions();
+};
+
+function viewAllEmployees(connection) {
+    connection.query('SELECT * FROM employee', function(err, res) {
+        if(err) throw err;
+        console.log("\n Employees Retrieved from DB \n");
+        console.table(res);
+    });
+    questions();
+};
