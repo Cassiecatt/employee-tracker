@@ -188,7 +188,7 @@ function updateEmployeeRole(connection) {
         message: "Enter the ID of the role you are wanting to assign"
     }])
     .then(function(answer) {
-        connection.query('UPDATE employee SET ? WHERE id ?', //returning a syntax error near ? although it tests fine in mySQL
+        connection.query('UPDATE employee SET ? WHERE ?', 
         [
          {
             role_id: answer.roleID
