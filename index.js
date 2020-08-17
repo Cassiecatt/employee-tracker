@@ -18,7 +18,6 @@ const questions = () => {
                 "Add a Role",
                 "Add an Employee",
                 "Update an Employee Role",
-                "Leave"
             ]
         }
     ]).then(answer => {
@@ -44,8 +43,8 @@ const questions = () => {
             case "Update an Employee Role":
                 updateEmployeeRole(connection)
                 break;
-            default:
-                // quit();
+            // default:
+            //     // quit();
         }
     })
 };
@@ -164,7 +163,7 @@ function addEmployee(connection) {
             first_name: answer.firstName,
             last_name: answer.lastName,
             role_id: answer.employeeRoleID,
-            manager_id: answer.employeeManagerID // need to figure out how to make manager_id accept NULL 
+            manager_id: answer.employeeManagerID 
         },
         function(err, res) {
             if(err) throw err;
